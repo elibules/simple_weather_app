@@ -1,0 +1,25 @@
+.form {
+
+    margin: 0 auto;
+    margin-top: 1rem;
+    width: fit-content;
+    padding: 1rem;
+
+    input {
+        width: 200px;
+        padding: .5rem;
+        border-radius: 10px;
+        border: 2px solid rgb(41, 41, 41);
+        background-color: rgb(197, 224, 255);
+    }
+}
+
+#weather {
+    h1 {
+        color: whitesmoke;
+        font-weight: 300;
+        margin: 0 auto;
+        width: fit-content;
+        margin-top: 1rem;
+    }
+}
