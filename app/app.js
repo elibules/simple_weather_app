@@ -3,6 +3,10 @@ import * as Model from "./model.js";
 function initListeners() {
   console.log("ready");
 
+  $("#form").submit(function (e) {
+    e.preventDefault();
+  });
+
   $("#gwButton").click((e) => {
     const location = $("#gwInput").val();
     if (location) {

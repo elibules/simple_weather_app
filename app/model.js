@@ -51,14 +51,24 @@ function getCurrentWeather(location) {
       if (data.location.region) region = data.location.region + ", ";
 
       $("#weather").html(
-        `<h1>Location: ${data.location.name}, ${region} ${data.location.country}</h1>
-        <h2>${data.current.condition.text}</h2>
-            <h2>Temperature: ${data.current.temp_f}&deg f</h2>
-            <h2>Feels Like: ${data.current.feelslike_f}&deg f</h2>
-            <h3>Humidity: ${data.current.humidity}%</h3>
-            <h4>Wind: ${data.current.wind_mph} mph ${data.current.wind_dir}</h4>
-            <h4>Visibility: ${data.current.vis_miles} miles</h4>
-            <h4>UV Index: ${data.current.uv}</h4>
+        `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country}</h1>
+          <div id="weather-details"> <p>${data.current.condition.text}</p>
+            <p>Temperature: ${data.current.temp_f}&deg f</p>
+            <p>Feels Like: ${data.current.feelslike_f}&deg f</p>
+            <p>Humidity: ${data.current.humidity}%</p>
+            <p>Wind: ${data.current.wind_mph} mph ${data.current.wind_dir}</p>
+            <p>Visibility: ${data.current.vis_miles} miles</p>
+            <p>UV Index: ${data.current.uv}</p>
+            <div>
+              Metric:
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+          </div>
+          </div>
+          
+
             `
       );
     }
