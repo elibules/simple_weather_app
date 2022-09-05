@@ -4,4 +4,4 @@
 
 This site was made using vanilla JS, jQuery, SCSS, and HTML
 
-Weather API I used: https://www.weatherapi.com/
+Weather API used: https://www.weatherapi.com/
