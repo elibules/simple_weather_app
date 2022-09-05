@@ -37,13 +37,14 @@ function getAllNames() {
   }).fail((e) => alert(e.statusText));
 }
 
-async function getCurrentWeather(location) {
+async function getCurrentWeather(location, days) {
   // if (navigator.geolocation)
   //   navigator.geolocation.getCurrentPosition((position) => {
   //     console.log(position, getCurrentDate());
   await $.get(
     // `http://api.weatherapi.com/v1/current.json?key=${key}&q=${position.coords.latitude},${position.coords.longitude}&aqi=no`
-    `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&aqi=no`,
+    // `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&aqi=no`,
+    `http://api.weatherapi.com/v1/forecast.json?key=fa69005aa371478eb7b202327222908&q=${location}&days=${days}&aqi=no&alerts=no`,
     (data) => {
       console.log(data);
 
@@ -96,6 +97,27 @@ async function getCurrentWeather(location) {
           </div>
             `
           );
+      data.forecast.forecastday.map((day) => {
+        $("#weather")
+          .append(`<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country}</h1>
+        <div id="weather-details">
+            <img src="${data.current.condition.icon}" alt="${data.current.condition.text}"/>
+            <p id="details-description">${data.current.condition.text}</p>
+            <p>Temperature: ${data.current.temp_f}&deg f</p>
+            <p>Feels Like: ${data.current.feelslike_f}&deg f</p>
+            <p>Humidity: ${data.current.humidity}%</p>
+            <p>Wind: ${data.current.wind_mph} mph ${data.current.wind_dir}</p>
+            <p>Visibility: ${data.current.vis_miles} miles</p>
+            <p>UV Index: ${data.current.uv}</p>
+            <div class="switch-container">
+              <span class="switch-label">Metric:</span>
+              <div class="switch">
+                <input type="checkbox" id="mSwitch">
+                <span class="switch-circle"></span>
+              </div>
+          </div>
+          </div>`);
+      });
     }
   ).fail((e) => {
     alert(e.statusText);

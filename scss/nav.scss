@@ -19,12 +19,19 @@ nav {
             background-color: rgb(68, 68, 68);
         }
 
+        #dInput {
+            width: 90px;
+            border-radius: 0px;
+            border-top: 2px solid rgb(41, 41, 41);
+            border-bottom: 2px solid rgb(41, 41, 41);
+        }
+
         input:focus {
             outline: none;
         }
 
         button {
-            border-left: 0 !important;
+            border-left: 2px solid rgb(41, 41, 41);
             width: 40px;
             height: 40px;
             font-size: 18px;
