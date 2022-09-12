@@ -18,10 +18,11 @@ function getWeather(location, days) {
   Model.getCurrentWeather(location, days).then(() => {
     $("#mSwitch").prop("checked", JSON.parse(localStorage.getItem("switch")));
     $("#gwInput").val("");
+    $("#dInput").val("");
     $("#mSwitch").click((e) => {
       const b = $("#mSwitch").is(":checked");
       localStorage.setItem("switch", b);
-      getWeather(location);
+      getWeather(location, days);
     });
   });
 }

@@ -1,4 +1,4 @@
-const key = "fa69005aa371478eb7b202327222908";
+const key = "f08fa02913694e7c979152800221209";
 
 function getCurrentDate() {
   const d = new Date();
@@ -44,7 +44,7 @@ async function getCurrentWeather(location, days) {
   await $.get(
     // `http://api.weatherapi.com/v1/current.json?key=${key}&q=${position.coords.latitude},${position.coords.longitude}&aqi=no`
     // `http://api.weatherapi.com/v1/current.json?key=${key}&q=${location}&aqi=no`,
-    `http://api.weatherapi.com/v1/forecast.json?key=fa69005aa371478eb7b202327222908&q=${location}&days=${days}&aqi=no&alerts=no`,
+    `http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${location}&days=${days}&aqi=no&alerts=no`,
     (data) => {
       console.log(data);
 
@@ -53,10 +53,11 @@ async function getCurrentWeather(location, days) {
       let region = "";
       if (data.location.region) region = data.location.region + ", ";
 
-      JSON.parse(localStorage.getItem("switch"))
-        ? $("#weather").html(
-            `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country} </h1>
-          <div id="weather-details"> 
+      if (JSON.parse(localStorage.getItem("switch"))) {
+        $("#weather").html(
+          `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country} </h1>
+          <div class="weather-details"> 
+          <div>
           <img src="${data.current.condition.icon}" alt="${data.current.condition.text}"/>
            <p id="details-description">${data.current.condition.text} </p>
          
@@ -74,11 +75,25 @@ async function getCurrentWeather(location, days) {
               </div>
           </div>
           </div>
+          <div id="forecast"></div>
+          </div>
             `
-          )
-        : $("#weather").html(
-            `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country}</h1>
-        <div id="weather-details">
+        );
+        data.forecast.forecastday.map((forecast) => {
+          $("#forecast").append(`
+        <div class="forecast-day">
+            <p>${forecast.date}</p>
+            <p>Temperature: ${forecast.day.avgtemp_c}&deg c</p>
+            <p>High: ${forecast.day.maxtemp_c}&deg c</p>
+            <p>Low: ${forecast.day.mintemp_c}&deg c</p>
+            <p>Chance of Rain: ${forecast.day.daily_chance_of_rain}%</p>
+        </div>`);
+        });
+      } else {
+        $("#weather").html(
+          `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country}</h1>
+        <div class="weather-details">
+          <div>
             <img src="${data.current.condition.icon}" alt="${data.current.condition.text}"/>
             <p id="details-description">${data.current.condition.text}</p>
             <p>Temperature: ${data.current.temp_f}&deg f</p>
@@ -93,31 +108,23 @@ async function getCurrentWeather(location, days) {
                 <input type="checkbox" id="mSwitch">
                 <span class="switch-circle"></span>
               </div>
+            </div>
           </div>
+          <div id="forecast"></div>
           </div>
             `
-          );
-      data.forecast.forecastday.map((day) => {
-        $("#weather")
-          .append(`<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country}</h1>
-        <div id="weather-details">
-            <img src="${data.current.condition.icon}" alt="${data.current.condition.text}"/>
-            <p id="details-description">${data.current.condition.text}</p>
-            <p>Temperature: ${data.current.temp_f}&deg f</p>
-            <p>Feels Like: ${data.current.feelslike_f}&deg f</p>
-            <p>Humidity: ${data.current.humidity}%</p>
-            <p>Wind: ${data.current.wind_mph} mph ${data.current.wind_dir}</p>
-            <p>Visibility: ${data.current.vis_miles} miles</p>
-            <p>UV Index: ${data.current.uv}</p>
-            <div class="switch-container">
-              <span class="switch-label">Metric:</span>
-              <div class="switch">
-                <input type="checkbox" id="mSwitch">
-                <span class="switch-circle"></span>
-              </div>
-          </div>
-          </div>`);
-      });
+        );
+        data.forecast.forecastday.map((forecast) => {
+          $("#forecast").append(`
+        <div class="forecast-day">
+            <p>${forecast.date}</p>
+            <p>Temperature: ${forecast.day.avgtemp_f}&deg f</p>
+            <p>High: ${forecast.day.maxtemp_f}&deg f</p>
+            <p>Low: ${forecast.day.mintemp_f}&deg f</p>
+            <p>Chance of Rain: ${forecast.day.daily_chance_of_rain}%</p>
+        </div>`);
+        });
+      }
     }
   ).fail((e) => {
     alert(e.statusText);

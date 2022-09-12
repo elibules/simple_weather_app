@@ -24,6 +24,7 @@ p {
 body {
   background: rgb(255, 240, 205);
   background: linear-gradient(0deg, rgb(255, 240, 205) 0%, rgb(74, 95, 150) 57%, rgb(21, 33, 93) 100%);
+  background-size: cover;
 }
 
 button {
@@ -114,24 +115,27 @@ nav div button {
   background-position: center;
   background-repeat: no-repeat;
 }
-#weather #weather-details {
-  max-width: 400px;
+#weather .weather-details {
+  max-width: 600px;
   width: 100%;
+  max-height: 500px;
   border: 2px solid rgb(41, 41, 41);
   border-radius: 8px;
   background-color: rgb(68, 68, 68);
   padding: 1rem;
   margin: 1rem;
   margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
 }
-#weather #weather-details img {
+#weather .weather-details img {
   display: block;
   height: 64px;
   width: 64px;
   margin: 0 auto;
   margin-top: 1rem;
 }
-#weather #weather-details #details-description {
+#weather .weather-details #details-description {
   margin: 0 auto;
   margin-top: 0.5rem;
   position: relative;
@@ -140,8 +144,25 @@ nav div button {
   font-size: 30px;
   margin-bottom: 1rem;
 }
-#weather #weather-details p {
+#weather .weather-details p {
   font-size: 22px;
+}
+#weather .weather-details #forecast {
+  overflow: scroll;
+  width: 300px;
+  padding: 1rem;
+  max-height: 100%;
+  border: 2px solid rgb(41, 41, 41);
+  border-radius: 8px;
+}
+#weather .weather-details #forecast .forecast-day:nth-child(even) {
+  background-color: rgb(99, 99, 99);
+}
+#weather .weather-details #forecast .forecast-day {
+  padding: 10px;
+}
+#weather .weather-details #forecast .forecast-day p {
+  font-size: 16px;
 }
 #weather .switch-container {
   height: 20px;
