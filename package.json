@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "live-server"
+    "serve": "live-server",
+    "style": "sass scss/styles.scss css/styles.css"
   },
   "author": "Elijah Bules",
   "license": "ISC"

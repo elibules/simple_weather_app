@@ -135,7 +135,10 @@ nav div button {
   margin: 0 auto;
   margin-top: 1rem;
 }
-#weather .weather-details #details-description {
+#weather .weather-details #weather-current {
+  width: 300px;
+}
+#weather .weather-details #weather-current #details-description {
   margin: 0 auto;
   margin-top: 0.5rem;
   position: relative;

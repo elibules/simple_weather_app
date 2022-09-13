@@ -1,4 +1,6 @@
-const key = "f08fa02913694e7c979152800221209";
+// const key = "f08fa02913694e7c979152800221209";
+// Todd's Key
+const key = "53599ec288054906a0a203018222908";
 
 function getCurrentDate() {
   const d = new Date();
@@ -48,8 +50,6 @@ async function getCurrentWeather(location, days) {
     (data) => {
       console.log(data);
 
-      // localStorage.setItem("weatherData", JSON.stringify(data));
-
       let region = "";
       if (data.location.region) region = data.location.region + ", ";
 
@@ -57,7 +57,7 @@ async function getCurrentWeather(location, days) {
         $("#weather").html(
           `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country} </h1>
           <div class="weather-details"> 
-          <div>
+          <div id="weather-current">
           <img src="${data.current.condition.icon}" alt="${data.current.condition.text}"/>
            <p id="details-description">${data.current.condition.text} </p>
          
@@ -93,7 +93,7 @@ async function getCurrentWeather(location, days) {
         $("#weather").html(
           `<h1 style="font-size: 36px"><div></div>${data.location.name}, ${region} ${data.location.country}</h1>
         <div class="weather-details">
-          <div>
+          <div id="weather-current">
             <img src="${data.current.condition.icon}" alt="${data.current.condition.text}"/>
             <p id="details-description">${data.current.condition.text}</p>
             <p>Temperature: ${data.current.temp_f}&deg f</p>
