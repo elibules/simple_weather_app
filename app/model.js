@@ -11,34 +11,6 @@ function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
-function getAllNames() {
-  //   fetch("../data/data.json")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data);
-  //    });
-  //   let xhr = new XMLHttpRequest();
-  //   xhr.open("GET", "../data/data.json");
-  //   xhr.onload = () => {
-  //     let content = JSON.parse(xhr.responseText);
-  //     for (let i = 0; i < content.length; i++) {
-  //       const element = content[i];
-  //       console.log(element);
-  //     }
-  // };
-  // xhr.send(null);
-
-  $.getJSON("../data/data.json", (data) => {
-    for (let i = 0; i < data.length; i++) {
-      const element = data[i];
-      console.log(element);
-      $("#app").append(`<p>${element.name}</p>`);
-    }
-  }).fail((e) => alert(e.statusText));
-}
-
 async function getCurrentWeather(location, days) {
   // if (navigator.geolocation)
   //   navigator.geolocation.getCurrentPosition((position) => {
@@ -126,10 +98,11 @@ async function getCurrentWeather(location, days) {
         });
       }
     }
-  ).fail((e) => {
-    alert(e.statusText);
-  });
+  );
+  //  .fail((e) => {
+  //    alert(e.statusText);
+  //  });
   // });
 }
 
-export { getCurrentDate, getAllNames, getCurrentWeather };
+export { getCurrentDate, getCurrentWeather };
